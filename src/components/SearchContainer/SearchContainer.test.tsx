@@ -28,9 +28,6 @@ describe('Component SearchContainer', () => {
       const searchField = screen.getByLabelText("Search by Artist / Album");
       const button = screen.getByRole("button", { name: "Go"});
 
-      expect(searchField).toBeInTheDocument();
-      expect(button).toBeInTheDocument();
-
       fireEvent.change(searchField, { target: { value: 'Meat Loaf' } });
       fireEvent.click(button);
 
