@@ -2,18 +2,19 @@ import { fireEvent, render, screen } from '@testing-library/react';
 import { describe, expect, it, vi } from 'vitest';
 import AlbumSearchResult from './AlbumSearchResult';
 import type { Props } from './AlbumSearchResult';
+import type { Album } from '../../@types/album';
 
-const albumId = 1767673630;
-const artistName = 'Boys Like Girls';
-const albumName = 'Watch the Fire';
+const album: Album = {
+  id: 1767673630,
+  name: 'Boys Like Girls',
+  artistName: 'Watch the Fire'
+}
+
 const onSelect = vi.fn();
 
 const defaultProps: Props = {
-  id: albumId,
+  album,
   selected: false,
-  artistName,
-  albumName,
-  albumThumbSrc: undefined,
   onSelect
 };
 
@@ -33,11 +34,11 @@ describe('Component SearchContainer', () => {
     it('invokes onSelect function', () => {
       renderSearchContainer();
 
-      const itemButton = screen.getByRole("button", { name: `${artistName} ${albumName}` });
+      const itemButton = screen.getByRole("button", { name: `${album.name} ${album.artistName}` });
 
       fireEvent.click(itemButton);
 
-      expect(onSelect).toHaveBeenCalledExactlyOnceWith(albumId);
+      expect(onSelect).toHaveBeenCalledExactlyOnceWith(album.id);
     });
   });
 });

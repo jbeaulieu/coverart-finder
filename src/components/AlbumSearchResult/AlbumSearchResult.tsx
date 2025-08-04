@@ -1,27 +1,25 @@
 import { Avatar, ListItem, ListItemAvatar, ListItemButton, ListItemText } from "@mui/material";
+import type { Album } from "../../@types/album";
 
 export type Props = {
-  id: number;
+  album: Album;
   selected: boolean;
-  artistName: string;
-  albumName: string;
-  albumThumbSrc?: string;
   onSelect: (selected: number) => void;
 }
 
 const AlbumSearchResult = (props: Props) => {
 
-  const { id, selected, artistName, albumName, albumThumbSrc, onSelect } = props;
+  const { album, selected, onSelect } = props;
 
   return (
     <ListItem>
-      <ListItemButton selected={selected} onClick={() => onSelect(id)}>
+      <ListItemButton selected={selected} onClick={() => onSelect(album.id)}>
         <ListItemText
-          primary={artistName}
-          secondary={albumName}
+          primary={album.name}
+          secondary={album.artistName}
         />
         <ListItemAvatar>
-          <Avatar alt={albumName} src={albumThumbSrc} />
+          <Avatar alt={album.name} src={album.thumbnailSrc} />
         </ListItemAvatar>
       </ListItemButton>
     </ListItem>
