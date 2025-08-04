@@ -1,3 +1,4 @@
+import type { CSSProperties } from "react";
 import { Avatar, ListItem, ListItemAvatar, ListItemButton, ListItemText } from "@mui/material";
 import type { Album } from "../../@types/album";
 
@@ -5,14 +6,15 @@ export type Props = {
   album: Album;
   selected: boolean;
   onSelect: (selected: number) => void;
+  style: CSSProperties;
 }
 
 const AlbumSearchResult = (props: Props) => {
 
-  const { album, selected, onSelect } = props;
+  const { album, selected, onSelect, style } = props;
 
   return (
-    <ListItem>
+    <ListItem key={album.id} style={style} disablePadding>
       <ListItemButton selected={selected} onClick={() => onSelect(album.id)}>
         <ListItemText
           primary={album.name}

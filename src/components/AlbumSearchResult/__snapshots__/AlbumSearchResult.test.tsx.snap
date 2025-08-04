@@ -3,7 +3,8 @@
 exports[`Component SearchContainer > renders without crashing 1`] = `
 <DocumentFragment>
   <li
-    class="MuiListItem-root MuiListItem-gutters MuiListItem-padding css-cfd5wn-MuiListItem-root"
+    class="MuiListItem-root MuiListItem-gutters css-19f6boz-MuiListItem-root"
+    style="display: flex;"
   >
     <div
       class="MuiButtonBase-root MuiListItemButton-root MuiListItemButton-gutters MuiListItemButton-root MuiListItemButton-gutters css-4bx69l-MuiButtonBase-root-MuiListItemButton-root"

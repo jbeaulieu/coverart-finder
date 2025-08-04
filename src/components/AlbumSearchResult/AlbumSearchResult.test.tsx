@@ -15,7 +15,8 @@ const onSelect = vi.fn();
 const defaultProps: Props = {
   album,
   selected: false,
-  onSelect
+  onSelect,
+  style: { display: 'flex' }
 };
 
 const renderSearchContainer = (props = defaultProps) => {
