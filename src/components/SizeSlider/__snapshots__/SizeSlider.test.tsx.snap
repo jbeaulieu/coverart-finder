@@ -1,0 +1,72 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`Component SizeSlider > on click > renders without crashing 1`] = `
+<DocumentFragment>
+  <div
+    class="MuiBox-root css-ve9ogo"
+  >
+    <p
+      class="MuiTypography-root MuiTypography-body1 MuiTypography-gutterBottom css-vjrxpc-MuiTypography-root"
+      id="input-slider"
+    >
+      Download Size (px)
+    </p>
+    <div
+      class="MuiGrid-root MuiGrid-container MuiGrid-direction-xs-row MuiGrid-spacing-xs-2 css-mwb7rv-MuiGrid-root"
+    >
+      <div
+        class="MuiGrid-root MuiGrid-direction-xs-row MuiGrid-grid-xs-grow css-1ynczkt-MuiGrid-root"
+      >
+        <span
+          class="MuiSlider-root MuiSlider-colorPrimary MuiSlider-sizeMedium css-13vpke-MuiSlider-root"
+        >
+          <span
+            class="MuiSlider-rail css-r64h58-MuiSlider-rail"
+          />
+          <span
+            class="MuiSlider-track css-xvk2i-MuiSlider-track"
+            style="left: 0%; width: 5.2631578947368425%;"
+          />
+          <span
+            class="MuiSlider-thumb MuiSlider-thumbSizeMedium MuiSlider-thumbColorPrimary MuiSlider-thumb MuiSlider-thumbSizeMedium MuiSlider-thumbColorPrimary css-1xcmt9q-MuiSlider-thumb"
+            data-index="0"
+            style="left: 5.2631578947368425%;"
+          >
+            <input
+              aria-labelledby="input-slider"
+              aria-orientation="horizontal"
+              aria-valuemax="1000"
+              aria-valuemin="50"
+              aria-valuenow="100"
+              data-index="0"
+              max="1000"
+              min="50"
+              step="50"
+              style="border: 0px; height: 100%; margin: -1px; overflow: hidden; padding: 0px; position: absolute; white-space: nowrap; width: 100%; direction: ltr;"
+              type="range"
+              value="100"
+            />
+          </span>
+        </span>
+      </div>
+      <div
+        class="MuiGrid-root MuiGrid-direction-xs-row css-17fpwt7-MuiGrid-root"
+      >
+        <div
+          class="MuiInputBase-root MuiInput-root MuiInput-underline MuiInputBase-colorPrimary MuiInputBase-sizeSmall css-1cmet5c-MuiInputBase-root-MuiInput-root"
+        >
+          <input
+            aria-labelledby="input-slider"
+            class="MuiInputBase-input MuiInput-input MuiInputBase-inputSizeSmall css-1wd3yy0-MuiInputBase-input-MuiInput-input"
+            max="1000"
+            min="50"
+            step="50"
+            type="number"
+            value="100"
+          />
+        </div>
+      </div>
+    </div>
+  </div>
+</DocumentFragment>
+`;
