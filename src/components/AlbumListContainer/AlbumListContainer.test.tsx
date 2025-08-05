@@ -37,7 +37,7 @@ const renderAlbumListContainer = (props = defaultProps) => {
 
 describe('Component AlbumListContainer', () => {
 
-  describe('on click', () => {
+  describe('with default props', () => {
     it('renders without crashing', () => {
       const { asFragment } = renderAlbumListContainer();
 

@@ -2,9 +2,42 @@ import { useState } from 'react'
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
+import SearchContainer from './components/SearchContainer'
+import type { Album } from './@types/album'
+import AlbumListContainer from './components/AlbumListContainer'
+import SizeSlider from './components/SizeSlider'
+import CoverPreviewContainer from './components/CoverPreviewContainer'
+
+const album: Album = {
+  id: 1767673630,
+  name: 'Watch the Fire',
+  artistName: 'Boys Like Girls',
+  thumbnailSrc: "https://is1-ssl.mzstatic.com/image/thumb/Music221/v4/c0/4b/01/c04b0132-0f23-2a9a-88f4-c22d996470e9/067003846363.png/60x60bb.jpg"
+};
+
+const album2: Album = {
+  id: 276649794,
+  name: 'Boys Like Girls',
+  artistName: 'Boys Like Girls',
+  thumbnailSrc: "https://is1-ssl.mzstatic.com/image/thumb/Music115/v4/04/5a/e4/045ae4df-461d-db63-9b6f-cb48507c682d/mzi.ddfuhxng.jpg/60x60bb.jpg"
+}
+
+const album3: Album = {
+  id: 580265083,
+  name: 'Crazy World',
+  artistName: 'Boys Like Girls',
+  thumbnailSrc: "https://is1-ssl.mzstatic.com/image/thumb/Music124/v4/d9/bd/65/d9bd655f-7de6-30a1-c1dc-9db071e9879d/886443665224.jpg/60x60bb.jpg"
+}
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [count, setCount] = useState(3);
+  const [list, setList] = useState([album, album2, album3]);
+  const [imageSize, setImageSize] = useState(100);
+
+  const add = () => {
+    setCount(count + 1);
+    setList(list.concat([album3]));
+  };
 
   return (
     <>
@@ -17,8 +50,12 @@ function App() {
         </a>
       </div>
       <h1>Vite + React</h1>
+      <SearchContainer doSearch={(input: string) => console.log(input)} />
+      <AlbumListContainer albumList={list} selectedIndex={2} onSelect={(selected) => console.log(selected)} />
+      <SizeSlider size={imageSize} setSize={setImageSize} />
+      <CoverPreviewContainer imgSrc="https://is1-ssl.mzstatic.com/image/thumb/Music115/v4/04/5a/e4/045ae4df-461d-db63-9b6f-cb48507c682d/mzi.ddfuhxng.jpg/100x100bb.jpg" />
       <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
+        <button onClick={add}>
           count is {count}
         </button>
         <p>
@@ -32,4 +69,4 @@ function App() {
   )
 }
 
-export default App
+export default App;
