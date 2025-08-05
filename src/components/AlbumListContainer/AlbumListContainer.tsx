@@ -1,5 +1,6 @@
 import { Box } from "@mui/material";
 import type { Album } from "../../@types/album";
+import memoize from 'memoize-one';
 import { FixedSizeList, type ListChildComponentProps } from 'react-window';
 import AlbumSearchResult from "../AlbumSearchResult";
 
@@ -25,24 +26,28 @@ function renderRow(props: ListChildComponentProps<Props>) {
 }
 
 // This helper function memoizes incoming props,
-// To avoid causing unnecessary re-renders pure Row components.
+// to avoid causing unnecessary re-renders pure Row components.
 // This is only needed since we are passing multiple props with a wrapper object.
 // If we were only passing a single, stable value (e.g. albums),
-// We could just pass the value directly.
-// const createItemData = memoize((items, toggleItemActive) => ({
-//   items,
-//   toggleItemActive,
-// }));
+// we could just pass the value directly.
+const createAlbumData = memoize((albumList: Album[], selectedIndex: number, onSelect: (selected: number) => void) => ({
+  albumList,
+  selectedIndex,
+  onSelect,
+}));
 
 const AlbumListContainer = (props: Props) => {
   const { albumList, selectedIndex, onSelect } = props;
+
+  const memoizedAlbumData = createAlbumData(albumList, selectedIndex, onSelect)
+
   return (
   <Box sx={{ width: '100%', height: 400, maxWidth: 450 }}>
     <FixedSizeList
       height={400}
       width={450}
       itemCount={albumList.length}
-      itemData={{albumList, selectedIndex, onSelect}}
+      itemData={memoizedAlbumData}
       itemSize={72}
       overscanCount={5}
     >
