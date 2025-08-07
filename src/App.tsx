@@ -7,6 +7,7 @@ import type { Album } from './@types/album'
 import AlbumListContainer from './components/AlbumListContainer'
 import SizeSlider from './components/SizeSlider'
 import CoverPreviewContainer from './components/CoverPreviewContainer'
+import ITunesApiClient from './util/api/itunesApiClient'
 
 const album: Album = {
   id: 1767673630,
@@ -39,6 +40,17 @@ function App() {
     setList(list.concat([album3]));
   };
 
+  const doSearch = async (query: string) => {
+    try {
+      const results = await ITunesApiClient.searchAlbums(query);
+      console.log(results);
+      setList(results);
+      setCount(results.length);
+    } catch (error) {
+      console.error(`Error while fetching results: ${error}`);
+    }
+  };
+
   return (
     <>
       <div>
@@ -52,7 +64,7 @@ function App() {
       <h1>Vite + React</h1>
       <div id="container" style={{ display: 'flex', gap: 60 }}>
         <div id="finder-container" style={{ display: 'flex', flexDirection: 'column', alignItems: 'start' }}>
-          <SearchContainer doSearch={(input: string) => console.log(input)} />
+          <SearchContainer doSearch={(input: string) => doSearch(input)} />
           <AlbumListContainer albumList={list} selectedIndex={2} onSelect={(selected) => console.log(selected)} />
           <SizeSlider size={imageSize} setSize={setImageSize} />
         </div>
