@@ -50,10 +50,14 @@ function App() {
         </a>
       </div>
       <h1>Vite + React</h1>
-      <SearchContainer doSearch={(input: string) => console.log(input)} />
-      <AlbumListContainer albumList={list} selectedIndex={2} onSelect={(selected) => console.log(selected)} />
-      <SizeSlider size={imageSize} setSize={setImageSize} />
-      <CoverPreviewContainer imgSrc="https://is1-ssl.mzstatic.com/image/thumb/Music115/v4/04/5a/e4/045ae4df-461d-db63-9b6f-cb48507c682d/mzi.ddfuhxng.jpg/100x100bb.jpg" />
+      <div id="container" style={{ display: 'flex', gap: 60 }}>
+        <div id="finder-container" style={{ display: 'flex', flexDirection: 'column', alignItems: 'start' }}>
+          <SearchContainer doSearch={(input: string) => console.log(input)} />
+          <AlbumListContainer albumList={list} selectedIndex={2} onSelect={(selected) => console.log(selected)} />
+          <SizeSlider size={imageSize} setSize={setImageSize} />
+        </div>
+        <CoverPreviewContainer imgSrc={pma} />
+      </div>   
       <div className="card">
         <button onClick={add}>
           count is {count}

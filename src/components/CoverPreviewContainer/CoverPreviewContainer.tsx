@@ -1,4 +1,6 @@
+import Download from "@mui/icons-material/Download";
 import { Button } from "@mui/material";
+import './styles.css';
 
 export type Props = {
   imgSrc?: string;
@@ -33,9 +35,9 @@ const CoverPreviewContainer = (props: Props) => {
   };
 
   return (
-    <div className="preview" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+    <div className="preview-container">
       <img src={imgSrc} alt="cover art preview" width={300} height={300} style={{objectFit: 'cover'}} />
-      <Button variant="contained" onClick={() => downloadImage(imgSrc!)}>Download</Button>
+      <Button variant="contained" endIcon={<Download />} onClick={() => downloadImage(imgSrc!)}>Download</Button>
     </div>
   );
 }
