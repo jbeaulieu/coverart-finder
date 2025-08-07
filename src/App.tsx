@@ -8,6 +8,7 @@ import AlbumListContainer from './components/AlbumListContainer'
 import SizeSlider from './components/SizeSlider'
 import CoverPreviewContainer from './components/CoverPreviewContainer'
 import ITunesApiClient from './util/api/itunesApiClient'
+import { getITunesArtworkUrl } from './util/url/urlParser'
 
 const album: Album = {
   id: 1767673630,
@@ -33,7 +34,8 @@ const album3: Album = {
 function App() {
   const [count, setCount] = useState(3);
   const [list, setList] = useState([album, album2, album3]);
-  const [imageSize, setImageSize] = useState(100);
+  const [selectedIndex, setSelectedIndex] = useState(0);
+  const [imageSize, setImageSize] = useState(1000);
 
   const add = () => {
     setCount(count + 1);
@@ -41,6 +43,7 @@ function App() {
   };
 
   const doSearch = async (query: string) => {
+    setSelectedIndex(0);
     try {
       const results = await ITunesApiClient.searchAlbums(query);
       console.log(results);
@@ -50,6 +53,16 @@ function App() {
       console.error(`Error while fetching results: ${error}`);
     }
   };
+
+  const updateSelected = (id: number) => {
+    const index = list.findIndex((album) => album.id == id);
+    setSelectedIndex(index);
+  };
+
+  const getFullSizeArtwork = () => {
+    if (!list[selectedIndex].thumbnailSrc) return "";
+    return getITunesArtworkUrl(list[selectedIndex].thumbnailSrc, 1000)
+  }
 
   return (
     <>
@@ -65,10 +78,10 @@ function App() {
       <div id="container" style={{ display: 'flex', gap: 60 }}>
         <div id="finder-container" style={{ display: 'flex', flexDirection: 'column', alignItems: 'start' }}>
           <SearchContainer doSearch={(input: string) => doSearch(input)} />
-          <AlbumListContainer albumList={list} selectedIndex={2} onSelect={(selected) => console.log(selected)} />
+          <AlbumListContainer albumList={list} selectedIndex={selectedIndex} onSelect={(selected) => updateSelected(selected)} />
           <SizeSlider size={imageSize} setSize={setImageSize} />
         </div>
-        <CoverPreviewContainer imgSrc={pma} />
+        <CoverPreviewContainer imgSrc={getFullSizeArtwork()} />
       </div>   
       <div className="card">
         <button onClick={add}>
