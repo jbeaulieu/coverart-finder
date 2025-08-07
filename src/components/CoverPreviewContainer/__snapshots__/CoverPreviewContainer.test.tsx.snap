@@ -1,0 +1,24 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`Component CoverPreviewContainer > renders without crashing 1`] = `
+<DocumentFragment>
+  <div
+    class="preview"
+    style="display: flex; flex-direction: column; align-items: center;"
+  >
+    <img
+      alt="cover art preview"
+      height="300"
+      style="object-fit: cover;"
+      width="300"
+    />
+    <button
+      class="MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium MuiButton-colorPrimary MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium MuiButton-colorPrimary css-74d805-MuiButtonBase-root-MuiButton-root"
+      tabindex="0"
+      type="button"
+    >
+      Download
+    </button>
+  </div>
+</DocumentFragment>
+`;

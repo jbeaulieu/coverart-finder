@@ -1,58 +1,41 @@
+import { Button } from "@mui/material";
+
 export type Props = {
   imgSrc?: string;
 };
 
-
 const CoverPreviewContainer = (props: Props) => {
+
   const { imgSrc } = props;
 
-  const download = async (imgSrc: string) => {
-        try {
-            await fetch(imgSrc, {
-              method: 'GET',
-              headers: {
-                'Content-Type': 'image/png',
-              },
-            })
-            .then((response) => response.blob())
-            .then((blob) => {
-              // Create blob link to download
-              const url = window.URL.createObjectURL(blob);
+  const downloadImage = async (url: string) => {
+    await fetch(url)
+      .then((response) => response.blob())
+      .then((blob) => {
+        // Create a link element, hide it, direct it towards the blob, and then 'click' it programatically
+        const a = document.createElement("a");
+        a.style = "display: none";
+        document.body.appendChild(a);
+        // Create a DOMString representing the blob and point the link element towards it
+        const url = window.URL.createObjectURL(blob);
+        a.href = url;
+        a.download = 'cover.jpg';
+        // Click the link to trigger the download
+        a.click();
+        // Release the reference to the file by revoking the Object URL
+        window.URL.revokeObjectURL(url);
+        // Remove the invisible link element from the DOM
+        a.remove();
+      })
+      .catch(error => {
+        console.log(error);
+      });
+  };
 
-              const link = document.createElement('a');
-              link.href = url;
-              link.setAttribute(
-                'download',
-                `FileName.pdf`,
-              );
-
-              // Append to html link element page
-              document.body.appendChild(link);
-
-              // Start download
-              link.click();
-
-              // Clean up and remove the link
-              link.parentNode?.removeChild(link);
-            });
-        } catch (error) {
-            console.error('Error downloading the image:', error);
-        }
-    };
   return (
-    <div className="preview">
-      {/* <img src={imgSrc} width={300} height={300} style={{objectFit: 'cover'}} /> */}
-      <a
-        href={imgSrc}
-        download
-        onClick={() => download(imgSrc!)}
-      >
-        Download
-      </a>
-      <br />
-      <a href={imgSrc} target="_blank" download>A second download</a>
-      <br />
-      <a href={imgSrc} download="myimage"><img src={imgSrc} />A third download</a>
+    <div className="preview" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+      <img src={imgSrc} alt="cover art preview" width={300} height={300} style={{objectFit: 'cover'}} />
+      <Button variant="contained" onClick={() => downloadImage(imgSrc!)}>Download</Button>
     </div>
   );
 }
