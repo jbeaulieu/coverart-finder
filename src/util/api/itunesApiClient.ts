@@ -1,10 +1,9 @@
 import axios from 'axios';
 import type { AxiosResponse } from 'axios';
 import type { Album } from '../../@types/album';
+import config from '../config';
 
-const iTunesApi = {
-  baseUrl: ''
-};
+const { iTunesApi } = config;
 
 type ITunesCollection = {
   wrapperType: 'track' | 'collection';
