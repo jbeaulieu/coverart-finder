@@ -27,7 +27,7 @@ const onSelect = vi.fn();
 
 const defaultProps: Props = {
   albumList: [album0, album1, album2],
-  selectedIndex,
+  selectedAlbumId: selectedIndex,
   onSelect,
 };
 

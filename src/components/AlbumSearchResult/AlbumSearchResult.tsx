@@ -5,7 +5,7 @@ import type { Album } from "../../@types/album";
 export type Props = {
   album: Album;
   selected: boolean;
-  onSelect: (selected: number) => void;
+  onSelect: (selectedId: number) => void;
   style: CSSProperties;
 }
 

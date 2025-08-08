@@ -6,8 +6,8 @@ import AlbumSearchResult from "../AlbumSearchResult";
 
 export type Props = {
   albumList: Album[];
-  selectedIndex: number;
-  onSelect: (selected: number) => void;
+  selectedAlbumId: number;
+  onSelect: (selectedId: number) => void;
 };
 
 // Helper method that runs for each album in the albumList prop, generating a
@@ -17,29 +17,29 @@ export type Props = {
 // keeping the AlbumSearchResult component independent.
 function renderRow(props: ListChildComponentProps<Props>) {
   const { index, style, data } = props;
-  const { albumList, selectedIndex, onSelect } = data;
+  const { albumList, selectedAlbumId, onSelect } = data;
   const album = albumList[index];
 
   return (
-    <AlbumSearchResult album={album} selected={index === selectedIndex} onSelect={onSelect} style={style} />
+    <AlbumSearchResult album={album} selected={album.id == selectedAlbumId} onSelect={onSelect} style={style} />
   );
 }
 
 // This helper function memoizes incoming props,
-// to avoid causing unnecessary re-renders pure Row components.
+// to avoid causing unnecessary re-renders for the row components.
 // This is only needed since we are passing multiple props with a wrapper object.
 // If we were only passing a single, stable value (e.g. albums),
 // we could just pass the value directly.
-const createAlbumData = memoize((albumList: Album[], selectedIndex: number, onSelect: (selected: number) => void) => ({
+const createAlbumData = memoize((albumList: Album[], selectedAlbumId: number, onSelect: (selectedId: number) => void) => ({
   albumList,
-  selectedIndex,
+  selectedAlbumId,
   onSelect,
 }));
 
 const AlbumListContainer = (props: Props) => {
-  const { albumList, selectedIndex, onSelect } = props;
+  const { albumList, selectedAlbumId, onSelect } = props;
 
-  const memoizedAlbumData = createAlbumData(albumList, selectedIndex, onSelect)
+  const memoizedAlbumData = createAlbumData(albumList, selectedAlbumId, onSelect);
 
   return (
   <Box sx={{ width: '100%', height: 400, maxWidth: 450 }}>
@@ -50,6 +50,7 @@ const AlbumListContainer = (props: Props) => {
       itemData={memoizedAlbumData}
       itemSize={72}
       overscanCount={5}
+      // ref={listRef}
     >
       {renderRow}
     </FixedSizeList>
