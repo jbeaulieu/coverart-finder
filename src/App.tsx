@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { createRef, useState } from 'react'
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
@@ -9,6 +9,7 @@ import SizeSlider from './components/SizeSlider'
 import CoverPreviewContainer from './components/CoverPreviewContainer'
 import ITunesApiClient from './util/api/itunesApiClient'
 import { getITunesArtworkUrl } from './util/url/urlParser'
+import type { FixedSizeList } from 'react-window'
 
 const album: Album = {
   id: 1767673630,
@@ -37,6 +38,8 @@ function App() {
   const [selectedAlbum, setSelectedAlbum] = useState<Album>(album);
   const [imageSize, setImageSize] = useState(1000);
 
+  const listRef = createRef<FixedSizeList>();
+
   const add = () => {
     setCount(count + 1);
     setList(list.concat([album3]));
@@ -45,12 +48,14 @@ function App() {
   const doSearch = async (query: string) => {
     try {
       const results = await ITunesApiClient.searchAlbums(query);
-      console.log(results);
       setList(results);
       setCount(results.length);
     } catch (error) {
       console.error(`Error while fetching results: ${error}`);
     }
+
+    // Scroll to top after setting new search results
+    listRef.current?.scrollToItem(0);
   };
 
   const updateSelected = (selectedId: number) => {
@@ -77,7 +82,7 @@ function App() {
       <div id="container" style={{ display: 'flex', gap: 60 }}>
         <div id="finder-container" style={{ display: 'flex', flexDirection: 'column', alignItems: 'start' }}>
           <SearchContainer doSearch={(input: string) => doSearch(input)} />
-          <AlbumListContainer albumList={list} selectedAlbumId={selectedAlbum.id} onSelect={(id) => updateSelected(id)} />
+          <AlbumListContainer albumList={list} listRef={listRef} selectedAlbumId={selectedAlbum.id} onSelect={(id) => updateSelected(id)} />
           <SizeSlider size={imageSize} setSize={setImageSize} />
         </div>
         <CoverPreviewContainer imgSrc={getFullSizeArtwork()} />

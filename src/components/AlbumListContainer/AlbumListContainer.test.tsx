@@ -3,6 +3,7 @@ import { describe, expect, it, vi } from 'vitest';
 import AlbumListContainer from './AlbumListContainer';
 import type { Props } from './AlbumListContainer';
 import type { Album } from '../../@types/album';
+import { createRef} from 'react';
 
 const album0: Album = {
   id: 1767673630,
@@ -22,12 +23,12 @@ const album2: Album = {
   artistName: 'Boys Like Girls',
 }
 
-const selectedIndex = 2;
 const onSelect = vi.fn();
 
 const defaultProps: Props = {
   albumList: [album0, album1, album2],
-  selectedAlbumId: selectedIndex,
+  listRef: createRef(),
+  selectedAlbumId: album2.id,
   onSelect,
 };
 

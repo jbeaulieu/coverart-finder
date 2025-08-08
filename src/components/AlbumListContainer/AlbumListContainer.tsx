@@ -6,16 +6,21 @@ import AlbumSearchResult from "../AlbumSearchResult";
 
 export type Props = {
   albumList: Album[];
+  listRef: React.RefObject<FixedSizeList | null>;
   selectedAlbumId: number;
   onSelect: (selectedId: number) => void;
 };
+
+// Elements in the results list will use the same props as the AlbumListContainer,
+// minus the ref to the List root element.
+type ListItemProps = Omit<Props, "listRef">;
 
 // Helper method that runs for each album in the albumList prop, generating a
 // corresponding AlbumSearchResult component. The react-window <FixedSizeList> component
 // expects a child method like this which can be run to generate the components for each
 // item in the list, rather than just an array of components. This method does that while
 // keeping the AlbumSearchResult component independent.
-function renderRow(props: ListChildComponentProps<Props>) {
+function renderRow(props: ListChildComponentProps<ListItemProps>) {
   const { index, style, data } = props;
   const { albumList, selectedAlbumId, onSelect } = data;
   const album = albumList[index];
@@ -37,7 +42,7 @@ const createAlbumData = memoize((albumList: Album[], selectedAlbumId: number, on
 }));
 
 const AlbumListContainer = (props: Props) => {
-  const { albumList, selectedAlbumId, onSelect } = props;
+  const { albumList, listRef, selectedAlbumId, onSelect } = props;
 
   const memoizedAlbumData = createAlbumData(albumList, selectedAlbumId, onSelect);
 
@@ -50,7 +55,7 @@ const AlbumListContainer = (props: Props) => {
       itemData={memoizedAlbumData}
       itemSize={72}
       overscanCount={5}
-      // ref={listRef}
+      ref={listRef}
     >
       {renderRow}
     </FixedSizeList>
