@@ -33,23 +33,16 @@ const album3: Album = {
 }
 
 function App() {
-  const [count, setCount] = useState(3);
   const [list, setList] = useState([album, album2, album3]);
   const [selectedAlbum, setSelectedAlbum] = useState<Album>(album);
   const [imageSize, setImageSize] = useState(1000);
 
   const listRef = createRef<FixedSizeList>();
 
-  const add = () => {
-    setCount(count + 1);
-    setList(list.concat([album3]));
-  };
-
   const doSearch = async (query: string) => {
     try {
       const results = await ITunesApiClient.searchAlbums(query);
       setList(results);
-      setCount(results.length);
     } catch (error) {
       console.error(`Error while fetching results: ${error}`);
     }
@@ -63,10 +56,15 @@ function App() {
     setSelectedAlbum(selection!);
   };
 
-  const getFullSizeArtwork = () => {
+  const getPreviewPaneArtwork = () => {
     if (!selectedAlbum.thumbnailSrc) return "";
-    return getITunesArtworkUrl(selectedAlbum.thumbnailSrc, 1000)
-  }
+    return getITunesArtworkUrl(selectedAlbum.thumbnailSrc, 600);
+  };
+
+  const getRequestedSizeArtwork = () => {
+    if (!selectedAlbum.thumbnailSrc) return "";
+    return getITunesArtworkUrl(selectedAlbum.thumbnailSrc, imageSize);
+  };
 
   return (
     <>
@@ -85,12 +83,9 @@ function App() {
           <AlbumListContainer albumList={list} listRef={listRef} selectedAlbumId={selectedAlbum.id} onSelect={(id) => updateSelected(id)} />
           <SizeSlider size={imageSize} setSize={setImageSize} />
         </div>
-        <CoverPreviewContainer imgSrc={getFullSizeArtwork()} />
+        <CoverPreviewContainer previewSrc={getPreviewPaneArtwork()} downloadSrc={getRequestedSizeArtwork()} />
       </div>   
       <div className="card">
-        <button onClick={add}>
-          count is {count}
-        </button>
         <p>
           Edit <code>src/App.tsx</code> and save to test HMR
         </p>

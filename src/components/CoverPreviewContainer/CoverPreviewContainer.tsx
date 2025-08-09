@@ -3,12 +3,13 @@ import { Button } from "@mui/material";
 import './styles.css';
 
 export type Props = {
-  imgSrc?: string;
+  previewSrc?: string;
+  downloadSrc?: string;
 };
 
 const CoverPreviewContainer = (props: Props) => {
 
-  const { imgSrc } = props;
+  const { previewSrc, downloadSrc } = props;
 
   const downloadImage = async (url: string) => {
     await fetch(url)
@@ -36,8 +37,8 @@ const CoverPreviewContainer = (props: Props) => {
 
   return (
     <div className="preview-container">
-      <img src={imgSrc} alt="cover art preview" width={300} height={300} style={{objectFit: 'cover'}} />
-      <Button variant="contained" endIcon={<Download />} onClick={() => downloadImage(imgSrc!)}>Download</Button>
+      <img src={previewSrc} alt="cover art preview" width={300} height={300} style={{objectFit: 'cover'}} />
+      <Button variant="contained" endIcon={<Download />} onClick={() => downloadImage(downloadSrc!)}>Download</Button>
     </div>
   );
 }

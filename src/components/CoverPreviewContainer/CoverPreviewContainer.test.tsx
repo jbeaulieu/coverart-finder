@@ -4,7 +4,8 @@ import CoverPreviewContainer from './CoverPreviewContainer';
 import type { Props } from './CoverPreviewContainer';
 
 const defaultProps: Props = {
-  imgSrc: undefined
+  previewSrc: undefined,
+  downloadSrc: undefined,
 };
 
 const renderCoverPreviewContainer = (props = defaultProps) => {
