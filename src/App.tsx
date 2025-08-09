@@ -73,18 +73,20 @@ function App() {
           <img src={viteLogo} className="logo" alt="Vite logo" />
         </a>
       </div>
-      <Card style={{ padding: 50, margin: 50 }}>
+      <Card style={{ padding: 50 }}>
+        <CardContent>
           <Typography fontSize={32} marginBottom={4} sx={{ color: 'text.secondary' }}>
             Coverart-Finder
           </Typography>
-        <div id="container" style={{ display: 'flex', gap: 60 }}>
-          <div id="finder-container" style={{ display: 'flex', flexDirection: 'column', alignItems: 'start' }}>
-            <SearchContainer doSearch={(input: string) => doSearch(input)} />
-            <AlbumListContainer albumList={list} listRef={listRef} selectedAlbumId={selectedAlbum.id} onSelect={(id) => updateSelected(id)} />
-            <SizeSlider size={imageSize} setSize={setImageSize} />
+          <div id="container" style={{ display: 'flex', gap: 60 }}>
+            <div id="finder-container" style={{ display: 'flex', flexDirection: 'column', alignItems: 'start' }}>
+              <SearchContainer doSearch={(input: string) => doSearch(input)} />
+              <AlbumListContainer albumList={list} listRef={listRef} selectedAlbumId={selectedAlbum.id} onSelect={(id) => updateSelected(id)} />
+              <SizeSlider size={imageSize} setSize={setImageSize} />
+            </div>
+            <CoverPreviewContainer previewSrc={getPreviewPaneArtwork()} downloadSrc={getRequestedSizeArtwork()} />
           </div>
-          <CoverPreviewContainer previewSrc={getPreviewPaneArtwork()} downloadSrc={getRequestedSizeArtwork()} />
-        </div>   
+        </CardContent>
       </Card>
       <p className="read-the-docs">
         Click on the Vite and React logos to learn more
