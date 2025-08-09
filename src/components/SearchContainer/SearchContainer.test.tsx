@@ -26,7 +26,7 @@ describe('Component SearchContainer', () => {
       renderSearchContainer();
 
       const searchField = screen.getByLabelText("Search by Artist / Album");
-      const button = screen.getByRole("button", { name: "Go"});
+      const button = screen.getByRole("button", { name: "search"});
 
       fireEvent.change(searchField, { target: { value: 'Meat Loaf' } });
       fireEvent.click(button);

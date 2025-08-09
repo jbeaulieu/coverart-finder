@@ -1,7 +1,8 @@
-import { Button } from '@mui/material';
+import { IconButton, InputAdornment } from '@mui/material';
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import { useState } from 'react';
+import SearchIcon from '@mui/icons-material/Search';
 
 export type Props = {
   doSearch: (searchParam: string) => void;
@@ -17,7 +18,8 @@ const SearchContainer = (props: Props) => {
   return (
     <Box
       component="form"
-      sx={{ '& > :not(style)': { m: 1, width: '25ch' } }}
+      sx={{ '& > :not(style)': { marginBottom: 2 } }}
+      width={1}
       noValidate
       autoComplete="off"
       onSubmit={(event) => event.preventDefault()}
@@ -30,8 +32,18 @@ const SearchContainer = (props: Props) => {
         onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
           setSearchParam(event.target.value);
         }}
+        fullWidth
+        slotProps={{
+          input: {
+            endAdornment:
+              <InputAdornment position="end">
+                <IconButton aria-label="search" onClick={handleSubmit} edge="end" type="submit">
+                  {<SearchIcon />}
+                </IconButton>
+              </InputAdornment>,
+            },
+          }}
       />
-      <Button type="submit" variant="contained" onClick={handleSubmit}>Go</Button>
     </Box>
   );
 }
