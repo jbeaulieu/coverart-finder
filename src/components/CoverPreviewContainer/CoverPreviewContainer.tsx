@@ -37,7 +37,7 @@ const CoverPreviewContainer = (props: Props) => {
 
   return (
     <div className="preview-container">
-      <img src={previewSrc} alt="cover art preview" width={300} height={300} style={{objectFit: 'cover'}} />
+      <img src={previewSrc} alt="cover art preview" width={600} height={600} style={{objectFit: 'cover'}} />
       <Button variant="contained" endIcon={<Download />} onClick={() => downloadImage(downloadSrc!)}>Download</Button>
     </div>
   );

@@ -3,14 +3,13 @@
 exports[`Component CoverPreviewContainer > renders without crashing 1`] = `
 <DocumentFragment>
   <div
-    class="preview"
-    style="display: flex; flex-direction: column; align-items: center;"
+    class="preview-container"
   >
     <img
       alt="cover art preview"
-      height="300"
+      height="600"
       style="object-fit: cover;"
-      width="300"
+      width="600"
     />
     <button
       class="MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium MuiButton-colorPrimary MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium MuiButton-colorPrimary css-74d805-MuiButtonBase-root-MuiButton-root"
@@ -18,6 +17,21 @@ exports[`Component CoverPreviewContainer > renders without crashing 1`] = `
       type="button"
     >
       Download
+      <span
+        class="MuiButton-icon MuiButton-endIcon MuiButton-iconSizeMedium css-1gulhci-MuiButton-endIcon"
+      >
+        <svg
+          aria-hidden="true"
+          class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-1umw9bq-MuiSvgIcon-root"
+          data-testid="DownloadIcon"
+          focusable="false"
+          viewBox="0 0 24 24"
+        >
+          <path
+            d="M5 20h14v-2H5zM19 9h-4V3H9v6H5l7 7z"
+          />
+        </svg>
+      </span>
     </button>
   </div>
 </DocumentFragment>

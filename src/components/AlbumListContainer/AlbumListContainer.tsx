@@ -47,10 +47,10 @@ const AlbumListContainer = (props: Props) => {
   const memoizedAlbumData = createAlbumData(albumList, selectedAlbumId, onSelect);
 
   return (
-  <Box sx={{ width: '100%', height: 400, maxWidth: 450 }}>
+  <Box sx={{ width: '100%', height: 500, maxWidth: 500, marginBottom: 4 }}>
     <FixedSizeList
-      height={400}
-      width={450}
+      height={500}
+      width={500}
       itemCount={albumList.length}
       itemData={memoizedAlbumData}
       itemSize={72}
