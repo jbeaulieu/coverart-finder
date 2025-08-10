@@ -1,4 +1,4 @@
-import { Box, Grid, Input, Slider, Typography } from "@mui/material";
+import { Box, Grid, Slider, Typography } from "@mui/material";
 import { useState, type SyntheticEvent } from "react";
 
 export type Props = {
@@ -26,31 +26,34 @@ const SizeSlider = (props: Props) => {
     setSelectedSize(newValue);
   }
 
-  const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setSize(event.target.value === '' ? MIN_IMAGE_SIZE_PX : Number(event.target.value));
-  };
+  // TODO: Either re-add the numeric input and fix the increment/decrement buttons,
+  // or remove these handlers
 
-  const sanitizeAndCommit = () => {
-    if (size < MIN_IMAGE_SIZE_PX) {
-      console.log("SANITIZING TO " + MIN_IMAGE_SIZE_PX);
-      setSize(MIN_IMAGE_SIZE_PX);
-      setSelectedSize(MIN_IMAGE_SIZE_PX);
-    } else if (size > MAX_IMAGE_SIZE_PX) {
-      console.log("SANITIZING TO " + MAX_IMAGE_SIZE_PX);
-      setSize(MAX_IMAGE_SIZE_PX);
-      setSelectedSize(MAX_IMAGE_SIZE_PX);
-    } else {
-      console.log("SANITIZING TO " + size);
-      setSelectedSize(size);
-    }
-  };
+  // const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+  //   setSize(event.target.value === '' ? MIN_IMAGE_SIZE_PX : Number(event.target.value));
+  // };
+
+  // const sanitizeAndCommit = () => {
+  //   if (size < MIN_IMAGE_SIZE_PX) {
+  //     console.log("SANITIZING TO " + MIN_IMAGE_SIZE_PX);
+  //     setSize(MIN_IMAGE_SIZE_PX);
+  //     setSelectedSize(MIN_IMAGE_SIZE_PX);
+  //   } else if (size > MAX_IMAGE_SIZE_PX) {
+  //     console.log("SANITIZING TO " + MAX_IMAGE_SIZE_PX);
+  //     setSize(MAX_IMAGE_SIZE_PX);
+  //     setSelectedSize(MAX_IMAGE_SIZE_PX);
+  //   } else {
+  //     console.log("SANITIZING TO " + size);
+  //     setSelectedSize(size);
+  //   }
+  // };
 
   return (
-    <Box sx={{ width: 450 }}>
+    <Box sx={{ width: 500 }}>
       <Typography id="input-slider" gutterBottom>
         Download Size (px)
       </Typography>
-      <Grid container spacing={2} sx={{ alignItems: 'center' }}>
+      <Grid container spacing={2} sx={{ placeItems: 'center' }}>
         <Grid size="grow">
           <Slider
             value={size}
@@ -62,21 +65,7 @@ const SizeSlider = (props: Props) => {
             aria-labelledby="input-slider"
           />
         </Grid>
-        <Grid>
-          <Input
-            value={size}
-            size="small"
-            onChange={handleInputChange}
-            onBlur={sanitizeAndCommit}
-            inputProps={{
-              step: 50,
-              min: MIN_IMAGE_SIZE_PX,
-              max: MAX_IMAGE_SIZE_PX,
-              type: 'number',
-              'aria-labelledby': 'input-slider',
-            }}
-          />
-        </Grid>
+          <Typography fontSize="1rem" style={{ marginBottom: 4 }}>{size}</Typography>
       </Grid>
     </Box>
   );

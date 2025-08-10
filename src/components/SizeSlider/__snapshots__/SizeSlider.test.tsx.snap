@@ -3,7 +3,7 @@
 exports[`Component SizeSlider > on click > renders without crashing 1`] = `
 <DocumentFragment>
   <div
-    class="MuiBox-root css-ve9ogo"
+    class="MuiBox-root css-qxh7fn"
   >
     <p
       class="MuiTypography-root MuiTypography-body1 MuiTypography-gutterBottom css-vjrxpc-MuiTypography-root"
@@ -12,7 +12,7 @@ exports[`Component SizeSlider > on click > renders without crashing 1`] = `
       Download Size (px)
     </p>
     <div
-      class="MuiGrid-root MuiGrid-container MuiGrid-direction-xs-row MuiGrid-spacing-xs-2 css-mwb7rv-MuiGrid-root"
+      class="MuiGrid-root MuiGrid-container MuiGrid-direction-xs-row MuiGrid-spacing-xs-2 css-1bcqwu3-MuiGrid-root"
     >
       <div
         class="MuiGrid-root MuiGrid-direction-xs-row MuiGrid-grid-xs-grow css-1ynczkt-MuiGrid-root"
@@ -49,23 +49,12 @@ exports[`Component SizeSlider > on click > renders without crashing 1`] = `
           </span>
         </span>
       </div>
-      <div
-        class="MuiGrid-root MuiGrid-direction-xs-row css-17fpwt7-MuiGrid-root"
+      <p
+        class="MuiTypography-root MuiTypography-body1 css-1lair6c-MuiTypography-root"
+        style="margin-bottom: 4px;"
       >
-        <div
-          class="MuiInputBase-root MuiInput-root MuiInput-underline MuiInputBase-colorPrimary MuiInputBase-sizeSmall css-1cmet5c-MuiInputBase-root-MuiInput-root"
-        >
-          <input
-            aria-labelledby="input-slider"
-            class="MuiInputBase-input MuiInput-input MuiInputBase-inputSizeSmall css-1wd3yy0-MuiInputBase-input-MuiInput-input"
-            max="1000"
-            min="50"
-            step="50"
-            type="number"
-            value="100"
-          />
-        </div>
-      </div>
+        100
+      </p>
     </div>
   </div>
 </DocumentFragment>
