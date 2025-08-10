@@ -82,7 +82,7 @@ function App() {
             <div id="finder-container" style={{ display: 'flex', flexDirection: 'column', alignItems: 'start' }}>
               <SearchContainer doSearch={(input: string) => doSearch(input)} />
               <AlbumListContainer albumList={list} listRef={listRef} selectedAlbumId={selectedAlbum.id} onSelect={(id) => updateSelected(id)} />
-              <SizeSlider size={imageSize} setSize={setImageSize} />
+              <SizeSlider selectedSize={imageSize} setSelectedSize={setImageSize} />
             </div>
             <CoverPreviewContainer previewSrc={getPreviewPaneArtwork()} downloadSrc={getRequestedSizeArtwork()} />
           </div>
