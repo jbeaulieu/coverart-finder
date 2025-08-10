@@ -11,28 +11,32 @@ exports[`Component CoverPreviewContainer > renders without crashing 1`] = `
       style="object-fit: cover;"
       width="600"
     />
-    <button
-      class="MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium MuiButton-colorPrimary MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium MuiButton-colorPrimary css-74d805-MuiButtonBase-root-MuiButton-root"
-      tabindex="0"
-      type="button"
+    <div
+      style="display: flex; gap: 20px;"
     >
-      Download
-      <span
-        class="MuiButton-icon MuiButton-endIcon MuiButton-iconSizeMedium css-1gulhci-MuiButton-endIcon"
+      <button
+        class="MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium MuiButton-colorPrimary MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium MuiButton-colorPrimary css-74d805-MuiButtonBase-root-MuiButton-root"
+        tabindex="0"
+        type="button"
       >
-        <svg
-          aria-hidden="true"
-          class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-1umw9bq-MuiSvgIcon-root"
-          data-testid="DownloadIcon"
-          focusable="false"
-          viewBox="0 0 24 24"
+        Download
+        <span
+          class="MuiButton-icon MuiButton-endIcon MuiButton-iconSizeMedium css-1gulhci-MuiButton-endIcon"
         >
-          <path
-            d="M5 20h14v-2H5zM19 9h-4V3H9v6H5l7 7z"
-          />
-        </svg>
-      </span>
-    </button>
+          <svg
+            aria-hidden="true"
+            class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-1umw9bq-MuiSvgIcon-root"
+            data-testid="DownloadIcon"
+            focusable="false"
+            viewBox="0 0 24 24"
+          >
+            <path
+              d="M5 20h14v-2H5zM19 9h-4V3H9v6H5l7 7z"
+            />
+          </svg>
+        </span>
+      </button>
+    </div>
   </div>
 </DocumentFragment>
 `;

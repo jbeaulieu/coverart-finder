@@ -1,15 +1,19 @@
 import Download from "@mui/icons-material/Download";
 import { Button } from "@mui/material";
 import './styles.css';
+import { useEffect, useState } from "react";
+import imgUtils from "../../util/ImgUtils";
 
 export type Props = {
+  selectedSize: number;
   previewSrc?: string;
   downloadSrc?: string;
 };
 
 const CoverPreviewContainer = (props: Props) => {
 
-  const { previewSrc, downloadSrc } = props;
+  const { selectedSize, previewSrc, downloadSrc } = props;
+  const [downloadMaxSize, setDownloadMaxSize] = useState(50_000);
 
   const downloadImage = async (url: string) => {
     await fetch(url)
@@ -34,6 +38,20 @@ const CoverPreviewContainer = (props: Props) => {
         console.log(error);
       });
   };
+
+  useEffect(() => {
+    if(downloadSrc) checkDownloadSize(downloadSrc);
+  }, [downloadSrc]);
+
+  const checkDownloadSize = async (url: string) => {
+    await fetch(url)
+      .then((response) => response.blob())
+      .then((blob) => {
+        const dataUrl = window.URL.createObjectURL(blob);
+        console.log(dataUrl)
+        imgUtils.getSizeForImg(dataUrl, setDownloadMaxSize);
+      });
+  }
 
   return (
     <div className="preview-container">

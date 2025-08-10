@@ -4,6 +4,7 @@ import CoverPreviewContainer from './CoverPreviewContainer';
 import type { Props } from './CoverPreviewContainer';
 
 const defaultProps: Props = {
+  selectedSize: 500,
   previewSrc: undefined,
   downloadSrc: undefined,
 };

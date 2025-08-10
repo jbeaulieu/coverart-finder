@@ -84,7 +84,7 @@ function App() {
               <AlbumListContainer albumList={list} listRef={listRef} selectedAlbumId={selectedAlbum.id} onSelect={(id) => updateSelected(id)} />
               <SizeSlider selectedSize={imageSize} setSelectedSize={setImageSize} />
             </div>
-            <CoverPreviewContainer previewSrc={getPreviewPaneArtwork()} downloadSrc={getRequestedSizeArtwork()} />
+            <CoverPreviewContainer selectedSize={imageSize} previewSrc={getPreviewPaneArtwork()} downloadSrc={getRequestedSizeArtwork()} />
           </div>
         </CardContent>
       </Card>
