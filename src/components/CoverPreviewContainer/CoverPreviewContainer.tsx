@@ -1,5 +1,8 @@
 import Download from "@mui/icons-material/Download";
-import { Button } from "@mui/material";
+import WarningIcon from '@mui/icons-material/Warning';
+import Button from "@mui/material/Button";
+import IconButton from "@mui/material/IconButton";
+import Tooltip from "@mui/material/Tooltip";
 import './styles.css';
 import { useEffect, useState } from "react";
 import imgUtils from "../../util/ImgUtils";
@@ -56,7 +59,18 @@ const CoverPreviewContainer = (props: Props) => {
   return (
     <div className="preview-container">
       <img src={previewSrc} alt="cover art preview" width={600} height={600} style={{objectFit: 'cover'}} />
-      <Button variant="contained" endIcon={<Download />} onClick={() => downloadImage(downloadSrc!)}>Download</Button>
+      <div style={{ display: 'flex', gap: 20, placeItems: 'center' }}>
+        <Button variant="contained" endIcon={<Download />} onClick={() => downloadImage(downloadSrc!)}>Download</Button>
+        {selectedSize > downloadMaxSize &&
+          <Tooltip 
+            title={`The highest resolution available from iTunes for this cover is ${downloadMaxSize} px.
+            Higher resolutions can be downloaded, but will be upscaled`}
+          >
+            <IconButton>
+              <WarningIcon color="warning" />
+            </IconButton>
+          </Tooltip>}
+      </div>
     </div>
   );
 }

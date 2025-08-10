@@ -12,7 +12,7 @@ exports[`Component CoverPreviewContainer > renders without crashing 1`] = `
       width="600"
     />
     <div
-      style="display: flex; gap: 20px;"
+      style="display: flex; gap: 20px; place-items: center;"
     >
       <button
         class="MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium MuiButton-colorPrimary MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium MuiButton-colorPrimary css-74d805-MuiButtonBase-root-MuiButton-root"
