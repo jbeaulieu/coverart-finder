@@ -1,6 +1,5 @@
 import { createRef, useState } from 'react'
-import viteLogo from '/vite.svg'
-import './App.css'
+import appIcon from './assets/appIcon.png'
 import SearchContainer from './components/SearchContainer'
 import type { Album } from './@types/album'
 import AlbumListContainer from './components/AlbumListContainer'
@@ -9,7 +8,8 @@ import CoverPreviewContainer from './components/CoverPreviewContainer'
 import ITunesApiClient from './util/api/itunesApiClient'
 import { getITunesArtworkUrl } from './util/url/urlParser'
 import type { FixedSizeList } from 'react-window'
-import { Card, CardContent, Typography } from '@mui/material'
+import { Card, Typography } from '@mui/material'
+import './App.css'
 
 const album: Album = {
   id: 1767673630,
@@ -68,29 +68,18 @@ function App() {
 
   return (
     <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-      </div>
-      <Card style={{ padding: 50 }}>
-        <CardContent>
-          <Typography fontSize={32} marginBottom={4} sx={{ color: 'text.secondary' }}>
-            Coverart-Finder
-          </Typography>
-          <div id="container" style={{ display: 'flex', gap: 60 }}>
-            <div id="finder-container" style={{ display: 'flex', flexDirection: 'column', alignItems: 'start' }}>
-              <SearchContainer doSearch={(input: string) => doSearch(input)} />
-              <AlbumListContainer albumList={list} listRef={listRef} selectedAlbumId={selectedAlbum.id} onSelect={(id) => updateSelected(id)} />
-              <SizeSlider selectedSize={imageSize} setSelectedSize={setImageSize} />
-            </div>
-            <CoverPreviewContainer selectedSize={imageSize} previewSrc={getPreviewPaneArtwork()} downloadSrc={getRequestedSizeArtwork()} />
-          </div>
-        </CardContent>
+      <img src={appIcon} className="logo" alt="App logo" />
+      <Typography fontSize={32} marginBottom={4}>
+        Coverart Finder
+      </Typography>
+      <Card sx={{ display: 'flex', gap:'50px', padding: '50px 50px 50px 30px'}}>
+        <div id="finder-container" style={{ display: 'flex', flexDirection: 'column', alignItems: 'start' }}>
+          <SearchContainer doSearch={(input: string) => doSearch(input)} />
+          <AlbumListContainer albumList={list} listRef={listRef} selectedAlbumId={selectedAlbum.id} onSelect={(id) => updateSelected(id)} />
+          <SizeSlider selectedSize={imageSize} setSelectedSize={setImageSize} />
+        </div>
+        <CoverPreviewContainer selectedSize={imageSize} previewSrc={getPreviewPaneArtwork()} downloadSrc={getRequestedSizeArtwork()} />
       </Card>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
     </>
   )
 }
