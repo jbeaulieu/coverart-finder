@@ -5,7 +5,7 @@ import IconButton from "@mui/material/IconButton";
 import Tooltip from "@mui/material/Tooltip";
 import './styles.css';
 import { useEffect, useState } from "react";
-import imgUtils from "../../util/ImgUtils";
+import ImageUtils from "../../util/imageUtils";
 
 export type Props = {
   selectedSize: number;
@@ -52,7 +52,7 @@ const CoverPreviewContainer = (props: Props) => {
       .then((blob) => {
         const dataUrl = window.URL.createObjectURL(blob);
         console.log(dataUrl)
-        imgUtils.getSizeForImg(dataUrl, setDownloadMaxSize);
+        ImageUtils.getSizeForImage(dataUrl, setDownloadMaxSize);
       });
   }
 
