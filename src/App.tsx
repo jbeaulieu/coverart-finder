@@ -1,5 +1,5 @@
 import { createRef, useState } from 'react'
-import appIcon from './assets/appIcon.png'
+import icon from './assets/icon.png'
 import SearchContainer from './components/SearchContainer'
 import type { Album } from './@types/album'
 import AlbumListContainer from './components/AlbumListContainer'
@@ -68,7 +68,7 @@ function App() {
 
   return (
     <>
-      <img src={appIcon} className="logo" alt="App logo" />
+      <img src={icon} className="logo" alt="App logo" />
       <Typography fontSize={32} marginBottom={4}>
         Coverart Finder
       </Typography>
