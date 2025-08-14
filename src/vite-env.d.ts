@@ -10,6 +10,7 @@ interface ImportMetaEnv {
   readonly VITE_APP_TITLE: string
   readonly VITE_ITUNES_API_URL: string;
   readonly VITE_DEEZER_API_URL: string;
+  readonly VITE_PROXY_URL: string;
 }
 
 interface ImportMeta {

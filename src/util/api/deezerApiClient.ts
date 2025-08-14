@@ -3,7 +3,7 @@ import type { AxiosResponse } from 'axios';
 import type { Album } from '../../@types/album';
 import config from '../config';
 
-const { deezerApi } = config;
+const { deezerApi, proxySettings } = config;
 
 type DeezerArtist = {
   id: number;
@@ -27,24 +27,19 @@ export type DeezerAlbumSearchResponse = {
 };
 
 const getRequestUrl = (): string => {
-  const baseUrl = deezerApi.baseUrl;
+  const baseUrl = proxySettings.baseUrl;
 
-  return baseUrl.endsWith('/') ? `${baseUrl}` : `${baseUrl}/`;
+  return baseUrl.endsWith('/') ? baseUrl.slice(0, -1) : baseUrl;
 };
 
 const DeezerApiClient = {
   searchAlbums: async (term: string): Promise<Album[]> => {
-    const requestPath = `${getRequestUrl()}search/album`;
 
-    const query = term.replaceAll(' ', '+');
+    const deezerRequest = `${deezerApi.baseUrl}/search/album?q=${term.replaceAll(' ', '+')}`;
+    const proxyRequest = `${getRequestUrl()}/v1/proxy?quest=` + encodeURIComponent(deezerRequest);
 
     return axios
-      .get(requestPath, {
-        params: {
-          q: query,
-          limit: 100,
-        },
-      })
+      .get(proxyRequest)
       .then((response: AxiosResponse<DeezerAlbumSearchResponse>) => {
         const { data } = response;
 

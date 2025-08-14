@@ -64,13 +64,13 @@ function App() {
 
   const getPreviewPaneArtwork = () => {
     if (!selectedAlbum.thumbnailSrc) return "";
-    return useExperimentalDeezer ? getDeezerArtworkUrl(selectedAlbum.thumbnailSrc, 600, 1000)
+    return useExperimentalDeezer ? getDeezerArtworkUrl(selectedAlbum.thumbnailSrc, 600, 100)
       : getITunesArtworkUrl(selectedAlbum.thumbnailSrc, 600);
   };
 
   const getRequestedSizeArtwork = () => {
     if (!selectedAlbum.thumbnailSrc) return "";
-    return useExperimentalDeezer ? getDeezerArtworkUrl(selectedAlbum.thumbnailSrc, imageSize, 1000)
+    return useExperimentalDeezer ? getDeezerArtworkUrl(selectedAlbum.thumbnailSrc, imageSize, 100)
       : getITunesArtworkUrl(selectedAlbum.thumbnailSrc, imageSize);
   };
 

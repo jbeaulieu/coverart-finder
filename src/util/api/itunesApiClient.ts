@@ -27,7 +27,7 @@ export type ITunesSearchResponse = {
 const getRequestUrl = (): string => {
   const baseUrl = iTunesApi.baseUrl;
 
-  return baseUrl.endsWith('/') ? `${baseUrl}` : `${baseUrl}/`;
+  return baseUrl.endsWith('/') ? baseUrl.slice(0, -1) : baseUrl;
 };
 
 const ITunesApiClient = {
