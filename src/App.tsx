@@ -46,20 +46,16 @@ function App() {
   const listRef = createRef<FixedSizeList>();
 
   const doSearch = async (query: string) => {
-    try {
-      const results = useExperimentalDeezer ? await DeezerApiClient.searchAlbums(query) : await ITunesApiClient.searchAlbums(query);
-      setList(results);
-    } catch (error) {
-      console.error(`Error while fetching results: ${error}`);
-    }
+    const results = useExperimentalDeezer ? await DeezerApiClient.searchAlbums(query) : await ITunesApiClient.searchAlbums(query);
+    setList(results);
 
     // Scroll to top after setting new search results
     listRef.current?.scrollToItem(0);
   };
 
   const updateSelected = (selectedId: number) => {
-    const selection = list.find((a) => a.id == selectedId);
-    setSelectedAlbum(selection!);
+    const selection = list.find((a) => a.id == selectedId)!;
+    setSelectedAlbum(selection);
   };
 
   const getPreviewPaneArtwork = () => {
@@ -83,7 +79,7 @@ function App() {
       <Switch value={useExperimentalDeezer} onChange={onToggle} />
       <Card sx={{ display: 'flex', gap:'50px', padding: '50px 50px 50px 30px'}}>
         <div id="finder-container" style={{ display: 'flex', flexDirection: 'column', alignItems: 'start' }}>
-          <SearchContainer doSearch={(input: string) => doSearch(input)} />
+          <SearchContainer doSearch={(input: string) => void doSearch(input)} />
           <AlbumListContainer albumList={list} listRef={listRef} selectedAlbumId={selectedAlbum.id} onSelect={(id) => updateSelected(id)} />
           <SizeSlider selectedSize={imageSize} setSelectedSize={setImageSize} />
         </div>

@@ -1,17 +1,17 @@
 import axios from 'axios';
-import type { AxiosResponse } from 'axios';
+import { AxiosError, type AxiosResponse } from 'axios';
 import type { Album } from '../../@types/album';
 import config from '../config';
 
 const { deezerApi, proxySettings } = config;
 
-type DeezerArtist = {
+interface DeezerArtist {
   id: number;
   name: string;
   picture_xl: string;
 };
 
-type DeezerAlbum = {
+interface DeezerAlbum {
   id: number;
   title: string;
   cover_small: string;
@@ -20,7 +20,7 @@ type DeezerAlbum = {
   artist: DeezerArtist;
 };
 
-export type DeezerAlbumSearchResponse = {
+export interface DeezerAlbumSearchResponse {
   data: DeezerAlbum[];
   total: number;
   next?: string;
@@ -43,29 +43,37 @@ const preferHttpsImgSrc = (url: string) => {
 
 const DeezerApiClient = {
   searchAlbums: async (term: string): Promise<Album[]> => {
+    try {
+      const deezerRequest = `${deezerApi.baseUrl}/search/album?q=${term.replaceAll(' ', '+')}`;
+      const proxyRequest = `${getRequestUrl()}/v1/proxy?quest=` + encodeURIComponent(deezerRequest);
 
-    const deezerRequest = `${deezerApi.baseUrl}/search/album?q=${term.replaceAll(' ', '+')}`;
-    const proxyRequest = `${getRequestUrl()}/v1/proxy?quest=` + encodeURIComponent(deezerRequest);
+      return axios
+        .get(proxyRequest)
+        .then((response: AxiosResponse<DeezerAlbumSearchResponse>) => {
+          const { data } = response;
 
-    return axios
-      .get(proxyRequest)
-      .then((response: AxiosResponse<DeezerAlbumSearchResponse>) => {
-        const { data } = response;
+          const result: Album[] = [];
 
-        const result: Album[] = [];
+          data.data.forEach((album) => {
+            result.push({
+              id: album.id,
+              artistName: album.artist.name,
+              name: album.title,
+              thumbnailSrc: preferHttpsImgSrc(album.cover_small),
+              coverSrc: preferHttpsImgSrc(album.cover_xl)
+            })
+          });
 
-        data.data.forEach((album) => {
-          result.push({
-            id: album.id ?? 0,
-            artistName: album.artist.name,
-            name: album.title ?? '-',
-            thumbnailSrc: preferHttpsImgSrc(album.cover_small),
-            coverSrc: preferHttpsImgSrc(album.cover_xl)
-          })
+          return Promise.resolve(result);
         });
-
-        return Promise.resolve(result);
-      });
+    }
+    catch (error: unknown) {
+      if (error instanceof AxiosError) {
+        console.error(`Error while fetching deezer search results: ${error.message}`)
+      }
+      
+      return Promise.resolve([]);
+    }
   },
 };
 

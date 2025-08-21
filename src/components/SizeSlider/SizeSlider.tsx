@@ -1,7 +1,7 @@
 import { Box, Grid, Slider, Typography } from "@mui/material";
 import { useState, type SyntheticEvent } from "react";
 
-export type Props = {
+export interface Props {
   selectedSize: number;
   setSelectedSize: (size: number) => void;
 };
@@ -25,28 +25,6 @@ const SizeSlider = (props: Props) => {
   const handleCommit = (_event: Event | SyntheticEvent, newValue: number) => {
     setSelectedSize(newValue);
   }
-
-  // TODO: Either re-add the numeric input and fix the increment/decrement buttons,
-  // or remove these handlers
-
-  // const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-  //   setSize(event.target.value === '' ? MIN_IMAGE_SIZE_PX : Number(event.target.value));
-  // };
-
-  // const sanitizeAndCommit = () => {
-  //   if (size < MIN_IMAGE_SIZE_PX) {
-  //     console.log("SANITIZING TO " + MIN_IMAGE_SIZE_PX);
-  //     setSize(MIN_IMAGE_SIZE_PX);
-  //     setSelectedSize(MIN_IMAGE_SIZE_PX);
-  //   } else if (size > MAX_IMAGE_SIZE_PX) {
-  //     console.log("SANITIZING TO " + MAX_IMAGE_SIZE_PX);
-  //     setSize(MAX_IMAGE_SIZE_PX);
-  //     setSelectedSize(MAX_IMAGE_SIZE_PX);
-  //   } else {
-  //     console.log("SANITIZING TO " + size);
-  //     setSelectedSize(size);
-  //   }
-  // };
 
   return (
     <Box sx={{ width: 500 }}>

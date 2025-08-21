@@ -4,7 +4,7 @@ import TextField from '@mui/material/TextField';
 import { useState } from 'react';
 import SearchIcon from '@mui/icons-material/Search';
 
-export type Props = {
+export interface Props {
   doSearch: (searchParam: string) => void;
 };
 

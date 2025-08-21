@@ -2,7 +2,7 @@ import type { CSSProperties } from "react";
 import { Avatar, ListItem, ListItemAvatar, ListItemButton, ListItemText } from "@mui/material";
 import type { Album } from "../../@types/album";
 
-export type Props = {
+export interface Props {
   album: Album;
   selected: boolean;
   onSelect: (selectedId: number) => void;

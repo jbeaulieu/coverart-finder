@@ -4,7 +4,7 @@ import memoize from 'memoize-one';
 import { FixedSizeList, type ListChildComponentProps } from 'react-window';
 import AlbumSearchResult from "../AlbumSearchResult";
 
-export type Props = {
+export interface Props {
   albumList: Album[];
   listRef: React.RefObject<FixedSizeList | null>;
   selectedAlbumId: number;

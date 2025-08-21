@@ -7,7 +7,7 @@ import './styles.css';
 import { useEffect, useState } from "react";
 import ImageUtils from "../../util/imageUtils";
 
-export type Props = {
+export interface Props {
   selectedSize: number;
   previewSrc?: string;
   downloadSrc?: string;
@@ -43,24 +43,24 @@ const CoverPreviewContainer = (props: Props) => {
   };
 
   useEffect(() => {
-    if(downloadSrc) checkDownloadSize(downloadSrc);
-  }, [downloadSrc]);
+    async function checkDownloadSize(url: string) {
+      await fetch(url)
+        .then((response) => response.blob())
+        .then((blob) => {
+          const dataUrl = window.URL.createObjectURL(blob);
+          console.log(dataUrl)
+          ImageUtils.getSizeForImage(dataUrl, setDownloadMaxSize);
+        });
+    }
 
-  const checkDownloadSize = async (url: string) => {
-    await fetch(url)
-      .then((response) => response.blob())
-      .then((blob) => {
-        const dataUrl = window.URL.createObjectURL(blob);
-        console.log(dataUrl)
-        ImageUtils.getSizeForImage(dataUrl, setDownloadMaxSize);
-      });
-  }
+    if(downloadSrc) void checkDownloadSize(downloadSrc);
+  }, [downloadSrc]);
 
   return (
     <div className="preview-container">
       <img src={previewSrc} alt="cover art preview" width={600} height={600} style={{objectFit: 'cover'}} />
       <div style={{ display: 'flex', gap: 20, placeItems: 'center' }}>
-        <Button variant="contained" endIcon={<Download />} onClick={() => downloadImage(downloadSrc!)}>Download</Button>
+        <Button variant="contained" endIcon={<Download />} onClick={() => void downloadImage(downloadSrc!)}>Download</Button>
         {selectedSize > downloadMaxSize &&
           <Tooltip 
             title={`The highest resolution available from iTunes for this cover is ${downloadMaxSize} px.

@@ -5,7 +5,7 @@ import config from '../config';
 
 const { iTunesApi } = config;
 
-type ITunesCollection = {
+interface ITunesCollection {
   wrapperType: 'track' | 'collection';
   kind: 'album' | 'song' | 'music-video';
   artistId: number;
@@ -19,7 +19,7 @@ type ITunesCollection = {
   artworkUrl100: string;
 };
 
-export type ITunesSearchResponse = {
+export interface ITunesSearchResponse {
   results: ITunesCollection[];
   resultCount: number;
 };

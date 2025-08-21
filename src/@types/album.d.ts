@@ -1,4 +1,4 @@
-export type Album = {
+export interface Album {
   id: number;
   name: string;
   artistName: string;
