@@ -32,6 +32,15 @@ const getRequestUrl = (): string => {
   return baseUrl.endsWith('/') ? baseUrl.slice(0, -1) : baseUrl;
 };
 
+/**
+ * With deezer requests routed through a proxy, we receive img source urls in http format.
+ * This is a simple regex replacer applied to album cover source urls to replace them with
+ * https versions.
+ **/
+const preferHttpsImgSrc = (url: string) => {
+    return url.replace(/^http(?!s)/, 'https');
+};
+
 const DeezerApiClient = {
   searchAlbums: async (term: string): Promise<Album[]> => {
 
@@ -50,8 +59,8 @@ const DeezerApiClient = {
             id: album.id ?? 0,
             artistName: album.artist.name,
             name: album.title ?? '-',
-            thumbnailSrc: album.cover_small,
-            coverSrc: album.cover_xl
+            thumbnailSrc: preferHttpsImgSrc(album.cover_small),
+            coverSrc: preferHttpsImgSrc(album.cover_xl)
           })
         });
 
