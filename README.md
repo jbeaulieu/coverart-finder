@@ -1,71 +1,47 @@
 # coverart-finder
 
-# React + TypeScript + Vite
+<p align="center">
+  <a href="https://sonarcloud.io/summary/overall?id=jbeaulieu_coverart-finder" alt="Quality Gate">
+    <img src="https://sonarcloud.io/api/project_badges/measure?project=jbeaulieu_coverart-finder&metric=alert_status" />
+  </a>
+  <a href="https://sonarcloud.io/summary/overall?id=jbeaulieu_coverart-finder" alt="Code Coverage">
+    <img src="https://sonarcloud.io/api/project_badges/measure?project=jbeaulieu_coverart-finder&metric=coverage" />
+  </a>
+  <img src="https://img.shields.io/github/languages/top/jbeaulieu/coverart-finder?style=flat" />
+  <img src="https://img.shields.io/github/license/jbeaulieu/coverart-finder?style=flat" />
+</p>
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Download album cover art from iTunes and Deezer, to use in your local music library.
 
-Currently, two official plugins are available:
+Try out the pre-release version: [Coverart-Finder on Render](https://coverart-finder.onrender.com/)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+> [!NOTE]  
+> coverart-finder is still in very early development. Basic searching and downloading functionality is stable, but no promises are made for availability, or timely updates if Apple suddenly decides to change their API.
 
-## Expanding the ESLint configuration
+## Inspiration
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+I have a large digital music collection amassed over years of buying old CDs (and several years of working as a DJ at my college radio station). But what do you do when you're trying to find the right album art after ripping a disc? Google images is unreliable at best, so I resorted to looking albums up on iTunes, Deezer, Spotify, and right-clicking then "save-as" on the album covers they had there. Tedious, but doable. But why suffer through the repetitiveness of finding the right cover, sizing it correctly, setting the right jpeg compression, when I could make a web tool that does all of that for you?
 
-```js
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+## Features
 
-      // Remove tseslint.configs.recommended and replace with this
-      ...tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      ...tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      ...tseslint.configs.stylisticTypeChecked,
+- Search for album cover art by artist and album name
+- Resolution selection
+- Alert when selected resolution exceeds what is available (most iTunes album artwork caps out around 1500-3000px square)
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+## Supported music providers
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+- iTunes/Apple Music
+- Deezer (experimental, coming soon)
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+## CI
 
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+Unit testing is configured with [vitest](https://vitest.dev). Coverage info is supplied to [sonarcloud](https://sonarcloud.io/summary/overall?id=jbeaulieu_coverart-finder) for PR quality gates and build analysis.
+
+## DIY
+
+If you want to contribute a new feature (thanks!) or just want to run coverart-finder locally, getting started is easy:
+
+1. Clone the repo
+2. Create a `.env` in the project root with your environment variables. See `.env.example` for starters.
+3. `yarn install && yarn dev`
+4. covertart-finder should be accessible on port 5173
