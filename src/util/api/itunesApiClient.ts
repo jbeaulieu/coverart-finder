@@ -36,9 +36,6 @@ const ITunesApiClient = {
 
     return axios
       .get(requestPath, {
-        headers: {
-          'Content-Type': 'application/json',
-        },
         params: {
           term,
           entity: 'album',
@@ -60,6 +57,13 @@ const ITunesApiClient = {
         });
 
         return Promise.resolve(result);
+      })
+      .catch((error: unknown) => {
+        if (error instanceof Error) {
+          console.error(`Error while fetching deezer search results: ${error.message}`)
+        }
+
+        return Promise.resolve([]);
       });
   },
 };

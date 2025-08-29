@@ -1,5 +1,4 @@
-import axios from 'axios';
-import { AxiosError, type AxiosResponse } from 'axios';
+import axios, { type AxiosResponse } from 'axios';
 import type { Album } from '../../@types/album';
 import config from '../config';
 
@@ -43,38 +42,37 @@ const preferHttpsImgSrc = (url: string) => {
 
 const DeezerApiClient = {
   searchAlbums: async (term: string): Promise<Album[]> => {
-    try {
-      const deezerRequest = `${deezerApi.baseUrl}/search/album?q=${term.replaceAll(' ', '+')}`;
-      const proxyRequest = `${getRequestUrl()}/v1/proxy?quest=` + encodeURIComponent(deezerRequest);
 
-      return axios
-        .get(proxyRequest)
-        .then((response: AxiosResponse<DeezerAlbumSearchResponse>) => {
-          const { data } = response;
+    const deezerRequest = `${deezerApi.baseUrl}/search/album?q=${term.replaceAll(' ', '+')}`;
+    const proxyRequest = `${getRequestUrl()}/v1/proxy?quest=` + encodeURIComponent(deezerRequest);
 
-          const result: Album[] = [];
+    return axios
+      .get(proxyRequest)
+      .then((response: AxiosResponse<DeezerAlbumSearchResponse>) => {
+        const { data } = response;
 
-          data.data.forEach((album) => {
-            result.push({
-              id: album.id,
-              artistName: album.artist.name,
-              name: album.title,
-              thumbnailSrc: preferHttpsImgSrc(album.cover_small),
-              coverSrc: preferHttpsImgSrc(album.cover_xl)
-            })
-          });
+        const result: Album[] = [];
 
-          return Promise.resolve(result);
+        data.data.forEach((album) => {
+          result.push({
+            id: album.id,
+            artistName: album.artist.name,
+            name: album.title,
+            thumbnailSrc: preferHttpsImgSrc(album.cover_small),
+            coverSrc: preferHttpsImgSrc(album.cover_xl)
+          })
         });
-    }
-    catch (error: unknown) {
-      if (error instanceof AxiosError) {
-        console.error(`Error while fetching deezer search results: ${error.message}`)
-      }
-      
-      return Promise.resolve([]);
-    }
-  },
+
+        return Promise.resolve(result);
+      })
+      .catch((error: unknown) => {
+        if (error instanceof Error) {
+          console.error(`Error while fetching deezer search results: ${error.message}`)
+        }
+
+        return Promise.resolve([]);
+      });
+  }
 };
 
 export default DeezerApiClient;
