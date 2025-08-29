@@ -3,7 +3,7 @@ import { describe, expect, it, vi } from 'vitest';
 import AlbumListContainer from './AlbumListContainer';
 import type { Props } from './AlbumListContainer';
 import type { Album } from '../../@types/album';
-import { createRef} from 'react';
+import type { RefObject } from 'react';
 
 const album0: Album = {
   id: 1767673630,
@@ -25,9 +25,13 @@ const album2: Album = {
 
 const onSelect = vi.fn();
 
+const mockRef: RefObject<null> = {
+  current: null
+};
+
 const defaultProps: Props = {
   albumList: [album0, album1, album2],
-  listRef: createRef(),
+  listRef: mockRef,
   selectedAlbumId: album2.id,
   onSelect,
 };

@@ -7,7 +7,7 @@ export interface Props {
 };
 
 export const MIN_IMAGE_SIZE_PX = 50;
-export const MAX_IMAGE_SIZE_PX = 1000;
+export const MAX_IMAGE_SIZE_PX = 1500;
 
 /* The SizeSlider keeps track of its own values in state so both pieces, the slider and
     the numeric input, can be kept in sync. The separate selectedSize props are only used

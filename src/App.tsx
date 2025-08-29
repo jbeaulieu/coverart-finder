@@ -1,4 +1,4 @@
-import { createRef, useState, type ChangeEvent } from 'react'
+import { useRef, useState, type ChangeEvent } from 'react'
 import icon from './assets/icon.png'
 import SearchContainer from './components/SearchContainer'
 import type { Album } from './@types/album'
@@ -43,7 +43,7 @@ function App() {
     setUseExperimentalDeezer(checked);
   };
 
-  const listRef = createRef<FixedSizeList>();
+  const listRef = useRef<FixedSizeList>(null);
 
   const doSearch = async (query: string) => {
     const results = useExperimentalDeezer ? await DeezerApiClient.searchAlbums(query) : await ITunesApiClient.searchAlbums(query);

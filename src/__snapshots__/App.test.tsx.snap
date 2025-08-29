@@ -251,21 +251,21 @@ exports[`Component App > renders without crashing 1`] = `
               />
               <span
                 class="MuiSlider-track css-xvk2i-MuiSlider-track"
-                style="left: 0%; width: 100%;"
+                style="left: 0%; width: 65.51724137931035%;"
               />
               <span
                 class="MuiSlider-thumb MuiSlider-thumbSizeMedium MuiSlider-thumbColorPrimary MuiSlider-thumb MuiSlider-thumbSizeMedium MuiSlider-thumbColorPrimary css-1xcmt9q-MuiSlider-thumb"
                 data-index="0"
-                style="left: 100%;"
+                style="left: 65.51724137931035%;"
               >
                 <input
                   aria-labelledby="input-slider"
                   aria-orientation="horizontal"
-                  aria-valuemax="1000"
+                  aria-valuemax="1500"
                   aria-valuemin="50"
                   aria-valuenow="1000"
                   data-index="0"
-                  max="1000"
+                  max="1500"
                   min="50"
                   step="50"
                   style="border: 0px; height: 100%; margin: -1px; overflow: hidden; padding: 0px; position: absolute; white-space: nowrap; width: 100%; direction: ltr;"
