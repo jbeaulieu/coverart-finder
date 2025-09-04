@@ -1,19 +1,19 @@
 import { render } from '@testing-library/react';
 import { describe, expect, it } from 'vitest';
-import App from './App';
-import SettingsContextProvider from './context/SettingsContextProvider';
+import SettingsContextProvider from '../../context/SettingsContextProvider';
+import AppContainer from './AppContainer';
 
-const renderApp = () => {
+const renderAppContainer = () => {
   return render(
     <SettingsContextProvider>
-      <App />
+      <AppContainer />
     </SettingsContextProvider>
   );
 };
 
-describe('Component App', () => {
+describe('Component AppContainer', () => {
   it('renders without crashing', () => {
-    const { asFragment } = renderApp();
+    const { asFragment } = renderAppContainer();
 
     expect(asFragment()).toMatchSnapshot();
   });

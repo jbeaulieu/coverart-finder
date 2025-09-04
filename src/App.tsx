@@ -1,4 +1,4 @@
-import { useRef, useState, type ChangeEvent } from 'react'
+import { useRef, useState } from 'react'
 import icon from './assets/icon.png'
 import SearchContainer from './components/SearchContainer'
 import type { Album } from './@types/album'
@@ -9,8 +9,10 @@ import ITunesApiClient from './util/api/itunesApiClient'
 import DeezerApiClient from './util/api/deezerApiClient'
 import { getDeezerArtworkUrl, getITunesArtworkUrl } from './util/url/urlParser'
 import type { FixedSizeList } from 'react-window'
-import { Card, Switch, Typography } from '@mui/material'
+import { Card, Typography } from '@mui/material'
 import './App.css'
+import useSettingsContext from './context/useSettingsContext'
+import { Provider } from './@types/enums'
 
 const album: Album = {
   id: 1767673630,
@@ -37,16 +39,16 @@ function App() {
   const [list, setList] = useState([album, album2, album3]);
   const [selectedAlbum, setSelectedAlbum] = useState<Album>(album);
   const [imageSize, setImageSize] = useState(1000);
-  const [useExperimentalDeezer, setUseExperimentalDeezer] = useState(false);
 
-  const onToggle = (_event: ChangeEvent, checked: boolean) => {
-    setUseExperimentalDeezer(checked);
-  };
+  const { settings } = useSettingsContext();
 
   const listRef = useRef<FixedSizeList>(null);
 
   const doSearch = async (query: string) => {
-    const results = useExperimentalDeezer ? await DeezerApiClient.searchAlbums(query) : await ITunesApiClient.searchAlbums(query);
+    const results = settings.provider == Provider.Deezer
+      ? await DeezerApiClient.searchAlbums(query)
+      : await ITunesApiClient.searchAlbums(query);
+
     setList(results);
 
     // Scroll to top after setting new search results
@@ -60,13 +62,13 @@ function App() {
 
   const getPreviewPaneArtwork = () => {
     if (!selectedAlbum.thumbnailSrc) return "";
-    return useExperimentalDeezer ? getDeezerArtworkUrl(selectedAlbum.thumbnailSrc, 600, 100)
+    return settings.provider == Provider.Deezer ? getDeezerArtworkUrl(selectedAlbum.thumbnailSrc, 600, 100)
       : getITunesArtworkUrl(selectedAlbum.thumbnailSrc, 600);
   };
 
   const getRequestedSizeArtwork = () => {
     if (!selectedAlbum.thumbnailSrc) return "";
-    return useExperimentalDeezer ? getDeezerArtworkUrl(selectedAlbum.thumbnailSrc, imageSize, 100)
+    return settings.provider == Provider.Deezer ? getDeezerArtworkUrl(selectedAlbum.thumbnailSrc, imageSize, 100)
       : getITunesArtworkUrl(selectedAlbum.thumbnailSrc, imageSize);
   };
 
@@ -76,7 +78,6 @@ function App() {
       <Typography fontSize={32} marginBottom={4}>
         Coverart Finder
       </Typography>
-      <Switch value={useExperimentalDeezer} onChange={onToggle} />
       <Card sx={{ display: 'flex', gap:'50px', padding: '50px 50px 50px 30px'}}>
         <div id="finder-container" style={{ display: 'flex', flexDirection: 'column', alignItems: 'start' }}>
           <SearchContainer doSearch={(input: string) => void doSearch(input)} />

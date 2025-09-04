@@ -13,7 +13,7 @@ export default defineConfig({
     setupFiles: ['./vitest.setup.ts'],
     include: ['**/?(*.)test.ts?(x)'],
     coverage: {
-      exclude: [...configDefaults.exclude, 'src/main.tsx', 'src/vite-env.d.ts', 'src/@types', 'src/util/config.ts', 'src/**/index.ts'],
+      exclude: [...configDefaults.exclude, 'src/main.tsx', 'src/vite-env.d.ts', 'src/@types', 'src/context/**', 'src/util/config.ts', 'src/**/index.ts'],
       reportsDirectory: './test_coverage',
       reporter: [
         ['lcov', { 'projectRoot': './src' }],
